@@ -33,7 +33,7 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["user.py"]
+CMD ["python", "user.py"]
 ```
 
 Bad practices:
@@ -66,7 +66,7 @@ RUN apt-get update && \
 
 COPY . .
 
-CMD ["user.py"]
+CMD ["python", "user.py"]
 ```
 Что было исправлено:
 1. ```FROM python:3.11.3``` - указана определенная версия python - 3.11.3;
