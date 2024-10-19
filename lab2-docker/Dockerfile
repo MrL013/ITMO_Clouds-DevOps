@@ -12,4 +12,4 @@ RUN apt-get update && \
 
 COPY . .
 
-CMD ["user.py"] 
+CMD ["python", "user.py"] 
