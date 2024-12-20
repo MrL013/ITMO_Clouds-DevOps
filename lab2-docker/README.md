@@ -18,7 +18,7 @@
 
 #### Напишем "Плохой" Dockerfile:
 
-```
+```Dockerfile
 FROM python:latest
 
 WORKDIR /usr/src/project
@@ -45,7 +45,7 @@ Bad practices:
 1. ```FROM python:latest``` - использование последней версии. При миграции контейнеров между разными системами могут быть различия в версиях, из-за чего какие-либо пакеты и зависимости могут отсутствовать, что приведет к несовместимости. Кроме того, это увеличит размер контейнера и запустит установку ненужных зависимостей. 
 2. ```ENV AUTH_KEY = "***key***"``` - указание ключей прямо в Dockerfile. Это небезопасно. При публикации проекта можно забыть убрать из файла ключ и это приведет к утечке конфиденциальных данных. Кроме того, если, например, разработка ведется в небольшой команде, где никто не скрывает ключи, при миграции контейнеров нужно будет каждый раз вводить другой ключ.
 3. Многослойность:
-```
+```Dockerfile
 RUN apt-get update
 RUN apt-get upgradeCOPY . .
 RUN pip install -r requirements.txt
@@ -57,7 +57,7 @@ RUN pip install -r requirements.txt
 
 #### Напишем "Хороший" Dockerfile:
 
-```
+```Dockerfile
 FROM python:3.11.3
 
 WORKDIR /usr/src/project
@@ -84,7 +84,7 @@ CMD ["python", "user.py"]
 1. ```FROM python:3.11.3``` - указана определенная версия python - 3.11.3;
 2. ```ENV AUTH_KEY = ${AUTH_KEY}``` - теперь ключ хранится не прямо в Dockerfile, а берется из окружения системы;
 3. 
-```
+```Dockerfile
 RUN apt-get update && \
     apt-get upgrade && \
     pip install --no-cache-dir -r requirements.txt
